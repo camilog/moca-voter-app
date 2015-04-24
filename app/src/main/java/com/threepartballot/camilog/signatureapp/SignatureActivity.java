@@ -70,8 +70,8 @@ public class SignatureActivity extends ActionBarActivity {
 
                 // Sign the encryptedBallot retrieved previously
                 try {
-                    // Set-up the instance of the scheme to sign, in this case, SHA1 with RSA
-                    Signature signature = Signature.getInstance("SHA512withRSA");
+                    // Set-up the instance of the scheme to sign, in this case, SHA256 with RSA
+                    Signature signature = Signature.getInstance("SHA256withRSA");
 
                     // Pass the privateKey to sign, plus a random number
                     signature.initSign(privateKey, new SecureRandom());
