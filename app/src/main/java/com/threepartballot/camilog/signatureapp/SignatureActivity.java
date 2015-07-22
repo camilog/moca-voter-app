@@ -1,5 +1,7 @@
 package com.threepartballot.camilog.signatureapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -17,6 +19,13 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.math.BigInteger;
 import java.security.KeyFactory;
@@ -25,70 +34,59 @@ import java.security.SecureRandom;
 import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 
-public class SignatureActivity extends ActionBarActivity {
+public class SignatureActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signature);
 
-        // Initialize SCAN application to retrieve encryptedBallot from the other device
         Intent intent = new Intent("com.google.zxing.client.android.SCAN");
         intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
         intent.putExtra("SCAN_CAMERA_ID", 0);
 
-        // Start SCAN activity
         startActivityForResult(intent, 0);
     }
 
-    // Handle the result of the SCAN activity
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        // Id of the SCAN activity initialized before
         if (requestCode == 0) {
-
-            // Handle successful scan
             if (resultCode == RESULT_OK) {
-                // Retrieve encryptedBallot from the SCAN, transform it to a byte[] and store it
                 String encryptedBallotString = intent.getStringExtra("SCAN_RESULT");
                 byte[] encryptedBallot = new BigInteger(encryptedBallotString).toByteArray();
 
-                // byte[] for the signature that will be shown to the other device
-                byte[] sigBytes;
+                String privateKeyString = "";
 
-                // Retrieve privateKey from a local file, using an AssetManager and store it in a PrivateKey variable
-                AssetManager assetManager = getApplicationContext().getAssets();
-                PrivateKey privateKey = null;
-                try {
-                    ObjectInputStream oin_key = new ObjectInputStream(new BufferedInputStream(assetManager.open("privateKey.key")));
-                    privateKey = (PrivateKey) oin_key.readObject();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                File privateKeyDir = getApplicationContext().getDir("privateKey", Context.MODE_PRIVATE);
+                File privateKeyFile = new File(privateKeyDir, "privateKey.key");
+
+                if (!privateKeyFile.exists()) {
+                    // Hacer algo cuando no existe la firma
                 }
 
-                // Create intent to initialize next activity (ShowSignature)
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader(privateKeyFile));
+                    privateKeyString = reader.readLine();
+                } catch (IOException e) {}
+
                 Intent intent2 = new Intent(this, ShowSignatureActivity.class);
 
-                // Sign the encryptedBallot retrieved previously
                 try {
-                    // Set-up the instance of the scheme to sign, in this case, SHA256 with RSA
-                    Signature signature = Signature.getInstance("SHA256withRSA");
+                    byte[] privateKeyBytes = new BigInteger(privateKeyString).toByteArray();
+                    PKCS8EncodedKeySpec privateSpec = new PKCS8EncodedKeySpec(privateKeyBytes);
+                    KeyFactory privateKeyFactory = KeyFactory.getInstance("RSA");
+                    PrivateKey privateKey = privateKeyFactory.generatePrivate(privateSpec);
 
-                    // Pass the privateKey to sign, plus a random number
+                    Signature signature = Signature.getInstance("SHA256withRSA");
                     signature.initSign(privateKey, new SecureRandom());
 
-                    // Pass the message to sign, in this case, encryptedBallot
                     signature.update(encryptedBallot);
+                    byte[] sigBytes = signature.sign();
 
-                    // Generate signature
-                    sigBytes = signature.sign();
-
-                    // Pass the value if the signature to the next activity (ShowSignature)
                     intent2.putExtra(ShowSignatureActivity.EXTRA_SIGNATURE, sigBytes);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
-                // Start ShowSignature
                 startActivity(intent2);
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -96,8 +94,8 @@ public class SignatureActivity extends ActionBarActivity {
                 Toast toast = Toast.makeText(this, "Scan was Cancelled!", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP, 25, 400);
                 toast.show();
-            }
 
+            }
         }
     }
 
@@ -119,7 +117,7 @@ public class SignatureActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
-
 }

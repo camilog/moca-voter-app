@@ -1,8 +1,9 @@
 package com.threepartballot.camilog.signatureapp;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -14,9 +15,8 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.math.BigInteger;
 
-public class ShowSignatureActivity extends ActionBarActivity {
+public class ShowSignatureActivity extends Activity {
 
-    // EXTRA to store the signature retrieved from the previous activity
     static public final String EXTRA_SIGNATURE = "com.threepartballot.camilog.signatureapp.signature";
 
     @Override
@@ -24,22 +24,19 @@ public class ShowSignatureActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_signature);
 
-        // Variable to store the signature retrieved from previous activity
         byte[] signature = getIntent().getByteArrayExtra(EXTRA_SIGNATURE);
+        String signatureString = new BigInteger(signature).toString();
 
-        // Element of the view, to display the signature later
         ImageView qrImageView = (ImageView) findViewById(R.id.qr_imageView);
 
-        // Create the QR-Code of the signature and place it in the imageView
         try {
-            qrImageView.setImageBitmap(generateQRCodeBitmap(new BigInteger(signature).toString()));
+            qrImageView.setImageBitmap(generateQRCodeBitmap(signatureString));
         } catch (WriterException e) {
             e.printStackTrace();
         }
 
     }
 
-    // Function to generate QRCode Bitmap from a String
     public Bitmap generateQRCodeBitmap(String data) throws WriterException {
         BitMatrix bitMatrix = new QRCodeWriter().encode(data, BarcodeFormat.QR_CODE, 400, 400);
 
@@ -75,7 +72,7 @@ public class ShowSignatureActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
-
 }
