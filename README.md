@@ -1,7 +1,7 @@
 # SignatureApp
-Third part of the project [*Voter-Ballot Self Verification*](http://www.cjgomez.cl).
+Third part of the project [*Voter-Ballot Self Verification*](https://github.com/CamiloG/VoterBallotSelfVerificationSystem).
 
-Android app for the voter to sign the encryption showed by [BallotSelection](http://www.cjgomez.cl).
+Android app for the voter to sign the encryption showed by [BallotSelection](https://github.com/CamiloG/BallotSelection).
 
 ## Files
 1. **MainActivity.java**:
@@ -17,7 +17,7 @@ Android app for the voter to sign the encryption showed by [BallotSelection](htt
 
 ## How to Use
 * Make sure you satisfy the minimum requirements described above.
-* Install the .apk file, which can be downloaded from [here](http://www.cjgomez.cl).
+* Install the .apk file, which can be downloaded from [here](https://github.com/CamiloG/VoterBallotSelfVerificationSystem/blob/master/Voter_Apps/signatureApp.apk?raw=true).
 
 ### Configuration
 * At the moment that the voter receive the private key of the signature, must open this app and select "Configure", then the voter must scan the QR-Code showed by VoterKeyGenerator.
