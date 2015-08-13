@@ -1,12 +1,15 @@
 # SignatureApp
-Third part of the project [*Voter-Ballot Self Verification*](https://github.com/CamiloG/VoterBallotSelfVerificationSystem).
+One of the parts of the [*MoCa QR*](https://github.com/CamiloG/moca_qr) Voting System project.
 
 Android app for the voter to sign the encryption showed by [BallotSelection](https://github.com/CamiloG/BallotSelection).
 
 ## Files
 1. **MainActivity.java**:
+
 2. **ConfigurationActivity.java**:
+
 3. **SignatureActivity.java**:
+
 4. **ShowSignatureActivity.java**:
 
 ### Minimum Requirements
@@ -17,13 +20,13 @@ Android app for the voter to sign the encryption showed by [BallotSelection](htt
 
 ## How to Use
 * Make sure you satisfy the minimum requirements described above.
-* Install the .apk file, which can be downloaded from [here](https://github.com/CamiloG/VoterBallotSelfVerificationSystem/blob/master/Voter_Apps/signatureApp.apk?raw=true).
+* Install the .apk file, which can be downloaded from [here](https://github.com/CamiloG/moca_qe/blob/master/Voter_Apps/signatureApp.apk?raw=true).
 
 ### Configuration
-* At the moment that the voter receive the private key of the signature, must open this app and select "Configure", then the voter must scan the QR-Code showed by VoterKeyGenerator.
+* At the moment that the voter receive the private key of the signature, select 'Configure Private Key', then the voter must scan the QR-Code showed by VoterKeyGenerator.
 
 ### Signature Process
-* When BallotSelection shows the encrypted ballot in a QR-Code, asks to the voter to sign it, so she has to use this app.
+* When BallotSelection shows the encrypted ballot in a QR-Code, asks to the voter to sign it using this app.
 * The voter scans the QR-Code of the encryption.
 * The app, using the private key recorded before, signs the encrypted ballot (in background).
 * After the signing process, the app shows in a QR-Code the signature produced.
