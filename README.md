@@ -1,7 +1,7 @@
-# SignatureApp
-One of the parts of the [*MoCa QR*](https://github.com/CamiloG/moca_qr) Voting System project.
+# VoterApp
+App for the Voters, which is part of the [*MoCa QR*](https://github.com/CamiloG/moca_qr) Voting System project.
 
-Android app for the voter to sign the encryption showed by [BallotSelection](https://github.com/CamiloG/BallotSelection).
+Android app for the voter to sign the encryption showed by [BallotSelection](https://github.com/CamiloG/BallotSelection) and to check if her vote is present on the BB.
 
 ## Files
 1. **MainActivity.java**:
