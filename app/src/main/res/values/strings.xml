@@ -6,8 +6,8 @@
     <string name="title_activity_show_signature">ShowSignatureActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_configuration">ConfigurationActivity</string>
-    <string name="configure_key">Registrar Clave Privada</string>
-    <string name="sign_ballot">Firmar Voto</string>
-    <string name="welcome_message">SignBallot\nProceda a elegir su opción</string>
-    <string name="show_signature_message">Lea el siguiente código con la tablet para generar su papeleta</string>
+    <string name="configure_key">Register Private Key</string>
+    <string name="sign_ballot">Sign ballot</string>
+    <string name="welcome_message">MoCa-QR - VoterApp</string>
+    <string name="show_signature_message">Press \'Receive Signature\' and read this QR code with the tablet</string>
 </resources>

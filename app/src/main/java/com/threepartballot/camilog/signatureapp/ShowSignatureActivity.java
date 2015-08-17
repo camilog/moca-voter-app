@@ -38,7 +38,7 @@ public class ShowSignatureActivity extends Activity {
     }
 
     public Bitmap generateQRCodeBitmap(String data) throws WriterException {
-        BitMatrix bitMatrix = new QRCodeWriter().encode(data, BarcodeFormat.QR_CODE, 400, 400);
+        BitMatrix bitMatrix = new QRCodeWriter().encode(data, BarcodeFormat.QR_CODE, 600, 600);
 
         int width = bitMatrix.getWidth();
         int height = bitMatrix.getHeight();
