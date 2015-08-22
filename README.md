@@ -1,7 +1,7 @@
 # VoterApp
-App for the Voters, which is part of the [*MoCa QR*](https://github.com/CamiloG/moca_qr) Voting System project.
+App for the Voters, which is part of the [*MoCa QR*](http://mocaqr.niclabs.cl) Voting System project.
 
-Android app for the voter to sign the encryption showed by [BallotSelection](https://github.com/CamiloG/BallotSelection) and to check if her vote is present on the BB.
+Android app for the voter to sign the encryption showed by [BallotSelection](https://github.com/niclabs/moca-ballot-selection) and to check if her vote is present on the BB.
 
 ## Files
 1. **MainActivity.java**:
@@ -30,7 +30,7 @@ Android app for the voter to sign the encryption showed by [BallotSelection](htt
 * The voter scans the QR-Code of the encryption.
 * The app, using the private key recorded before, signs the encrypted ballot (in background).
 * After the signing process, the app shows in a QR-Code the signature produced.
-* The voter must show the QR-Code of the signature to BallotSelection, after this SignatureApp finishes and the voter must keep using BallotSelection.
+* The voter must show the QR-Code of the signature to BallotSelection, after this VoterApp finishes and the voter must continue using BallotSelection.
 
 ### Verify vote present on BB
 *Not implemented yet.*
