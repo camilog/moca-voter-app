@@ -32,3 +32,5 @@ Android app for the voter to sign the encryption showed by [BallotSelection](htt
 * After the signing process, the app shows in a QR-Code the signature produced.
 * The voter must show the QR-Code of the signature to BallotSelection, after this SignatureApp finishes and the voter must keep using BallotSelection.
 
+### Verify vote present on BB
+*Not implemented yet.*
