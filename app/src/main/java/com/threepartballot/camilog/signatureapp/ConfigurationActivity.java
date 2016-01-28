@@ -49,7 +49,7 @@ public class ConfigurationActivity extends Activity {
                     writer.close();
 
                     Toast toast = Toast.makeText(this, "Private Key recorded successfully!", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP, 25, 400);
+                    toast.setGravity(Gravity.TOP, Gravity.CENTER_HORIZONTAL, 300);
                     toast.show();
 
                 } catch (IOException e) {}
